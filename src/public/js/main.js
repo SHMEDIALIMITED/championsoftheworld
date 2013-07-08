@@ -3,10 +3,10 @@ require.config({
 		'jquery': 'libs/jquery-1.8.3.min',
 		'backbone': 'libs/backbone-min',
 		'underscore': 'libs/underscore-min',
-		'webgl' : 'webgl',
-		'three' : 'Three',
-		'raf' : 'RAF',
-		'countrymodel' : 'CountryModel'
+		'three' : 'libs/Three',
+		'raf' : 'libs/RAF',
+		'io' : '/socket.io/socket.io',
+		'signal' : 'libs/signals.min'
 
 	},
  
@@ -33,7 +33,7 @@ require([
 	'app', 
 	'jquery',
 ], function(App, $) {
-	$(document).ready(function() {
+	$(function() {
 		App.init();
 	});
 });

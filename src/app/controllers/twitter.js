@@ -6,6 +6,8 @@ module.exports = function(app, config) {
 
 	var io = require('socket.io').listen(app);
 	
+	console.log('HASH', config.hashtag);
+
 	twit.stream('statuses/filter', {track:config.hashtag}, function( stream) {
 		stream.on('data', function (data) {
 			current = data;		
