@@ -100,7 +100,6 @@ module.exports = function(grunt) {
       packageDeploy.author = package.author;
       packageDeploy.description = package.description;
       packageDeploy.bugs = package.bugs;
-      packageDeploy.scripts.start = "node server";
       grunt.file.write('src/package.json', JSON.stringify(packageDeploy, null, '  '));
       grunt.log.ok('Version bumped to ' + packageDeploy.version);
     })
