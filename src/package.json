@@ -1,11 +1,8 @@
 {
-  "name": "SH-MEDIA-basic-main",
-  "version": "0.0.3",
+ "name": "Champions-of-the-World",
+  "version": "0.0.1",
   "author": "Patrick Wolleb <patrick.wolleb@shmedia.co.uk",
-  "description": "Web app template for Node.js with Backbone/Require frontend for deployment on Heroku",
-  "scripts": {
-    "start": "node server"
-  },
+  "description": "Champions-of-the-World web app",
   "engines": {
     "node": "0.8.14",
     "npm": "1.1.65"
@@ -20,7 +17,7 @@
     "underscore": "~1.4.4"
   },
   "bugs": {
-    "url": "https://github.com/SHMEDIALIMITED/web-app-basic/issues"
+    "url": "https://github.com/SHMEDIALIMITED/championsoftheworld/issues"
   },
   "repository": {
     "type": "git",
