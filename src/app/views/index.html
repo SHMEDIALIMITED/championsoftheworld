@@ -1,18 +1,76 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %> : <%= description %></title>
-    <link rel='stylesheet' href='css/main.css' />
-
-   <script data-main="js/main" src="js/libs/require-min.js"></script>
-    
-    <!-- Compile JS END -->
+    <title><%= title %></title>
+    <link rel="stylesheet" type="text/css" href="css/screen.css" />
   </head>
   <body>
-    <div class="container-fluid">
-      <h1><%= title %></h1>
-      <p><%= description %></p>
+    <div id="container"></div>
+    <div id="cue">
+      <ul></ul>
     </div>
-    <footer>Version: <%=version%></footer>
+
+    <div id="footer">
+
+      <div id="tweet-btn">
+        <!-- <a id="button" class="twitter-hashtag-button" data-size="large">Tweet #KeepOnPushing</a> -->
+        <a href="#">
+                              <i></i>
+                              <span class="label">Tweet #KeepOnPushing</span>
+                        </a>
+      </div>
+      <p>
+        or tweet anytime using your country's name and #championsoftheworld
+      </p>
+    </div>
+    
+    
+    
+    <div id="notification">
+      <p>
+        <span class="username">@PATRICK WOLLEB</span> GO TEAM SWITZERLAND <span class="last-tweet">5 sceonds ago</span>
+      </p>
+    </div>
+
+    <div id="overlay">
+      <form>
+        
+        <h2>Your Champions Of The World</h2>
+<div class="styled-select">
+    <select name="Country" id="country-selector" autofocus="autofocus" autocorrect="off" autocomplete="off">
+      
+    </select>
+ </div>   
+    
+      <div id="tweeter">
+               <a href="https://twitter.com/intent/tweet?button_hashtag=KeepOnPushing&text=Hello" class="twitter-hashtag-button" data-size="large">Tweet #championsoftheworld</a>
+                        <script>
+                              ! function(d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if(!d.getElementById(id)) {
+                                          js = d.createElement(s);
+                                          js.id = id;
+                                          js.src = "//platform.twitter.com/widgets.js";
+                                          fjs.parentNode.insertBefore(js, fjs);
+                                    }
+                              }(document, "script", "twitter-wjs");
+
+                        </script>
+
+
+
+      </div>
+   
+    
+  </form>
+    </div> 
+
+    <script src="js/jquery-1.7.2.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/Three.js"></script>
+    <script src="js/webgl.js"></script>
+    <script src="js/RAF.js"></script>
+            <script src="js/CountryModel.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

@@ -2,27 +2,26 @@
   "name": "Champions-of-the-World",
   "version": "0.0.1",
   "author": "Patrick Wolleb <patrick.wolleb@shmedia.co.uk",
-  "description": "Web app template for Node.js with Backbone/Require frontend for deployment on Heroku",
+  "description": "Champions-of-the-World web app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SHMEDIALIMITED/web-app-basic.git"
+    "url": "https://github.com/SHMEDIALIMITED/championsoftheworld.git"
   },
   "bugs": {
-    "url": "https://github.com/SHMEDIALIMITED/web-app-basic/issues"
+    "url": "https://github.com/SHMEDIALIMITED/championsoftheworld/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/SHMEDIALIMITED/web-app-basic/LICENSE-MIT"
+      "url": "https://github.com/SHMEDIALIMITED/championsoftheworld/LICENSE-MIT"
     }
   ],
   "keywords": [
-    "webapp",
-    "template",
-    "heroku",
-    "backbone",
-    "require",
-    "optimised"
+    "championsoftheworld",
+    "flag",
+    "webgl",
+    "shader",
+    "THREEJS"
   ],
   "dependencies": {
     "grunt": "0.3.17",

@@ -5,8 +5,7 @@ module.exports = function(config) {
 	api.index = function(req, res) {
 		res.render('index', {layout:false,locals:{
 			version:config.version, 
-			title: 'Champions of the World', description:'Flag WebGL', 
-			fbAppID: config.facebook.clientID}});
+			title: 'Champions of the World', description:'Flag WebGL'}});
 	}
 
 	api.canvas = function(req, res) {

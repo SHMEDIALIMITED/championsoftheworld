@@ -7,11 +7,13 @@ module.exports = {
         name: 'Web App Dev'
       },
       db: 'mongodb://localhost/tallest_tower_dev',
-      facebook: {
-          clientID: "351418368295988"
-        , clientSecret: "a5a572f8cbca84075fbeeec6a65e1657"
-        , callbackURL: "http://localhost:3000/auth/facebook/callback"
+      twitter: {
+        consumer_key: 'u6GPk5YU3FlI5ulxesBPg',
+        consumer_secret: '0kT0ITCJ2p37hXh4166KTM4eZrKp9vifQKOh3Ls0',
+        access_token_key: '22387661-xyP2A4NB7WbSJ5inouaLvXFncnLI0Tk7BwoquIpRw',
+        access_token_secret: 'OzQSN1gWAiOOb4IazfSttpX4Qv0uoVDV4Fwox7GjqI'
       },
+      hashtag : 'KeepOnPushing'
       
     }
   , production: {
@@ -21,10 +23,14 @@ module.exports = {
         name: 'Web App'
       },
       db: process.env.MONGOLAB_URI,
-      facebook: {
-          clientID: process.env.FACEBOOK_APP_ID
-        , clientSecret: process.env.FACEBOOK_SECRET
+      twitter: {
+        consumer_key: 'u6GPk5YU3FlI5ulxesBPg',
+        consumer_secret: '0kT0ITCJ2p37hXh4166KTM4eZrKp9vifQKOh3Ls0',
+        access_token_key: '22387661-xyP2A4NB7WbSJ5inouaLvXFncnLI0Tk7BwoquIpRw',
+        access_token_secret: 'OzQSN1gWAiOOb4IazfSttpX4Qv0uoVDV4Fwox7GjqI'
       },
+      hashtag : 'championsoftheworld'
+
 
     }
 }

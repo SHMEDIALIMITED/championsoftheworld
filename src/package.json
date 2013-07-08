@@ -14,7 +14,12 @@
     "b64url": "~1.0.3",
     "mongoose": "~3.5.4",
     "mongo-connect": "0.0.6",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "socket.io" : "latest",
+    "ntwitter" : "latest",
+     "oauth": ">=0.8.4", 
+    "cookies": "0.1.x",
+    "keygrip": "0.1.x"
   },
   "bugs": {
     "url": "https://github.com/SHMEDIALIMITED/championsoftheworld/issues"
