@@ -6,6 +6,13 @@ var countries = require('../models').Countries;
 module.exports = function(app, config, io) {
 	var twit = new twitter(config.twitter);
 
+	//Heroku "doesn't support" websockets on the Cedar stack yet (no word on when they will). 
+	//They recommend adding the following code to your Socket.io implementation:
+	io.configure(function () { 
+	  io.set("transports", ["xhr-polling"]); 
+	  io.set("polling duration", 10); 
+	});
+	
 	twit.stream('statuses/filter', {track:config.hashtag}, function( stream) {
 		stream.on('data', function (data) {
 			var country = getCountryForText(data.text);
