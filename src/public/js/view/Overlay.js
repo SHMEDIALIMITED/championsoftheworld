@@ -19,6 +19,9 @@ define([
 			},
 
 			onCountrySelected : function(e){
+
+				
+				var hashtag = this.options.hashtag;
 				var $tweeter = this.$el.find('#tweeter');
 				$tweeter.show();
 				$tweeter.find('iframe').remove();
@@ -35,8 +38,8 @@ define([
 				        .addClass('twitter-share-button')
 				        .attr('href', 'http://twitter.com/share')
 				        .attr('data-url', response.id)
-				        .attr('data-text', 'KeepOnPushing ' + e.currentTarget.value)
-				        .attr('data-hashtags', 'KeepOnPushing')
+				        .attr('data-text', 'Come on ' + e.currentTarget.value)
+				        .attr('data-hashtags', hashtag)
 				        .attr('data-size', 'large')
 				        .attr('data-count', 'none');
 				       

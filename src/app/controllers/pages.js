@@ -15,7 +15,8 @@ module.exports = function(config) {
 				title: 'Champions of the World', 
 				description:'Flag WebGL',
 				queue : '[]',
-				host : config.host}
+				host : config.host,
+				hashtag: config.hashtag}
 			});
 		  }else {
 
@@ -34,7 +35,8 @@ module.exports = function(config) {
 					title: 'Champions of the World', 
 					description:'Flag WebGL',
 					queue : JSON.stringify(tweets),
-					host : config.host},
+					host : config.host,
+					hashtag: config.hashtag},
 				});
 			})
 		  	

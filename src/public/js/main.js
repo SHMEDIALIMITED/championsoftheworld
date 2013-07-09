@@ -36,6 +36,6 @@ require([
 	var app;
 
 	$(function() {
-		app = new App({host:window.COTW_HOST, collection:window.COTW_QUEUE});
+		app = new App({host:window.COTW_HOST, collection:window.COTW_QUEUE, hashtag:window.COTW_HASHTAG});
 	});
 });

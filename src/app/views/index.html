@@ -8,6 +8,7 @@
     <script type="text/javascript">
       window.COTW_QUEUE = <%-queue%>;
       window.COTW_HOST = '<%-host%>';
+      window.COTW_HASHTAG = '<%=hashtag%>';
     </script>
   </head>
   <body>
@@ -23,10 +24,10 @@
       <div id="tweet-btn">
         <a href="#">
             <i></i>
-            <span class="label">Tweet #championsoftheworld</span>
+            <span class="label">Tweet #<%=hashtag%></span>
         </a>
       </div>
-      <p>or tweet anytime using your country's name and #championsoftheworld</p>
+      <p>or tweet anytime using your country's name and #<%=hashtag%></p>
       <span id="version">Version: <%=version%></span>
     </div>
     
@@ -46,7 +47,7 @@
           <select name="Country" id="country-selector" autofocus="autofocus" autocorrect="off" autocomplete="off"></select>
         </div>
         <div id="tweeter">
-          <a href="https://twitter.com/intent/tweet?button_hashtag=KeepOnPushing&text=Hello" class="twitter-hashtag-button" data-size="large">Tweet #championsoftheworld</a>
+          <a href="https://twitter.com/intent/tweet?button_hashtag='<%=hashtag%>'&text=Hello" class="twitter-hashtag-button" data-size="large">Tweet #championsoftheworld</a>
           <script>
                 ! function(d, s, id) {
                       var js, fjs = d.getElementsByTagName(s)[0];
