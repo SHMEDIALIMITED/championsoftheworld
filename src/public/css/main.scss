@@ -42,7 +42,7 @@ h3 {
 }
 
 p {
-	font-size: 1.4em;
+	font-size: 2em;
 }
 
 
@@ -81,14 +81,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ffffff', e
 
 #selector { position: absolute; }
 
-#cue {position:absolute; right: 0px; background: rgba(255,255,255,.1); bottom:-1px; }
-#cue ul {list-style: none; -webkit-margin-before: 0px;
+#queue {position:absolute; right: 0px; background: rgba(255,255,255,.3); bottom:-1px; }
+#queue ul {list-style: none; -webkit-margin-before: 0px;
 -webkit-margin-after: 0px;
 -webkit-margin-start: 0px;
 -webkit-margin-end: 0px;
 -webkit-padding-start: 10px;}
 
-#footer p {font-size: 100%; color: #000; float:left;  width: 600px;  margin-top:6px; font-weight: bold; font-style: italic; padding: 0px 10px; }
+.queueit { 
+  background:url('Australia_thumb.gif') left no-repeat; 
+  background-position: center left;  
+  width: 250px; height: 18px; 
+  border-bottom:  solid 1px rgba(10, 10, 10, 0.5);  
+  padding-bottom: 10px;
+  padding-left:40px;
+  padding-top:10px;
+  font-size: 1.6em;
+}
+.queueit p {margin-left: 30px; font-size: 2em; -webkit-margin-after: 0px;
+-webkit-margin-start: 30px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 10px;}
+
+#footer p {font-size: 1.6em;; color: #000; float:left;  width: 600px;  margin-top:6px; font-weight: bold; font-style: italic; padding: 0px 10px; }
 
 #player { position: absolute; right: 0px; bottom: 0px;}
 
@@ -112,9 +127,6 @@ background-image: -webkit-gradient(
 
 }
 
-#tweeter {
-  display: none;
-}
 
 #tweet-btn {
   max-width: 100%;
@@ -124,7 +136,7 @@ zoom: 1;
 white-space: nowrap;
 text-align: left;
 visibility: visible;
-font-size: 13px;
+font-size: 1.6em;
 line-height: 26px;
 font: normal normal normal 11px/18px 'Helvetica Neue',Arial,sans-serif;
 color: #333;
@@ -156,7 +168,7 @@ top: 50%;
   cursor: pointer;
   text-align: left;
   visibility: visible;
-  font-size: 13px;
+  font-size: 1.3em;
   line-height: 27px;
 }
 
@@ -214,18 +226,29 @@ top: 50%;
   border-radius: 2px;
 } 
 
+.close-btn {
+  background:#ddd;
+  padding:10px;
+  font-size: 1.6em;
+}
+
+#overlay form .close-btn {
+  float: right;
+}
+
 #overlay h2{
   font-size: 30px;
   margin-top: 30px
 }
-.cueit { background:url('Australia_thumb.gif') left no-repeat; background-position: top left;  width: 250px; height: 18px; border-bottom:  solid 1px rgba(10, 10, 10, 0.5);  padding-bottom: 10px;}
-.cueit p {margin-left: 30px; font-size: 16px; -webkit-margin-after: 0px;
--webkit-margin-start: 30px;
--webkit-margin-end: 0px;
--webkit-padding-start: 10px;}
+
 #notification span {color: #00B1C6; }
-#notification p {margin: 0 auto; width: 500px; padding-top:10px;}
-#notification { position: absolute; width: 100%; height: 35px; background: rgba(255,255,255,0.7);  ;font-weight: bold; 
+#notification p {margin: 0 auto; width: 500px; padding-top:5px;}
+#notification {
+  display: none; 
+  position: absolute; 
+  width: 100%; height: 35px;
+  background: rgba(255,255,255,0.7);
+  font-weight: bold; 
 }
 
 #version {

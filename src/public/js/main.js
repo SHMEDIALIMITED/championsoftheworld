@@ -5,7 +5,6 @@ require.config({
 		'underscore': 'libs/underscore-min',
 		'three' : 'libs/Three',
 		'raf' : 'libs/RAF',
-		'io' : '/socket.io/socket.io',
 		'signal' : 'libs/signals.min'
 
 	},
@@ -33,7 +32,10 @@ require([
 	'app', 
 	'jquery',
 ], function(App, $) {
+
+	var app;
+
 	$(function() {
-		App.init();
+		app = new App({host:window.COTW_HOST, collection:window.COTW_QUEUE});
 	});
 });

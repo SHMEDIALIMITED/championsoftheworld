@@ -14,11 +14,14 @@ define([
 			el : '#overlay',
 
 			events: {
-				'change form select' : 'onCountrySelected'
+				'change form select' : 'onCountrySelected',
+				'click .close-btn' : 'hide'
 			},
 
 			onCountrySelected : function(e){
-				$('#tweeter').show();
+				var $tweeter = this.$el.find('#tweeter');
+				$tweeter.show();
+				$tweeter.find('iframe').remove();
 				// shorten URL and reload Tweet button with correct data attributes 
 				$.ajax({
 			        url: 'https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/fbsS&key=AIzaSyANFw1rVq_vnIzT4vVOwIw3fF1qHXV7Mjw',

@@ -6,7 +6,8 @@ module.exports = {
       app: {
         name: 'Web App Dev'
       },
-      db: 'mongodb://localhost/tallest_tower_dev',
+      db: 'mongodb://localhost/championsoftheworld',
+      host : 'http://localhost',
       twitter: {
         consumer_key: 'u6GPk5YU3FlI5ulxesBPg',
         consumer_secret: '0kT0ITCJ2p37hXh4166KTM4eZrKp9vifQKOh3Ls0',
@@ -23,6 +24,7 @@ module.exports = {
         name: 'Web App'
       },
       db: process.env.MONGOLAB_URI,
+      host : 'http://champions-of-the-world.herokuapp.com',
       twitter: {
         consumer_key: 'u6GPk5YU3FlI5ulxesBPg',
         consumer_secret: '0kT0ITCJ2p37hXh4166KTM4eZrKp9vifQKOh3Ls0',

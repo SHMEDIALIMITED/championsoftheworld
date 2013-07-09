@@ -14,6 +14,9 @@ define([
 
 	var time = 0.0;
 
+	// detail factor
+	var detail = 3;
+
 	// set the scene size
 	var WIDTH = 400,
 	    HEIGHT = 300;
@@ -24,12 +27,19 @@ define([
 	    NEAR = 0.1,
 	    FAR = 10000000;
 
+	var CENTER = new THREE.Vector3(400,0,0)    
+
 	var renderer, camera, scene, mat, light, plane, vertices;
 
+	var mouseX, mouseY, easing = 0.0;
 
 	return Backbone.View.extend({
 
 		el: '#container',
+
+		// events :{
+		// 	'mousemove' : 'onMouseMove'
+		// },
 
 		initialize : function() {
 
@@ -62,8 +72,9 @@ define([
 			
 
 			// Flag Plane
-			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,100,50), mat);
+			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,detail*100,25), mat);
 			plane.rotation.x = Math.PI / 2;	
+			plane.position.x = -20;
 			scene.add(plane);
 			
 			// Populate the array of attributes for animtion in update call
@@ -72,7 +83,7 @@ define([
 				vertices[v].x += 410;
 			}
 
-			requestAnimFrame(this.render);
+			requestAnimFrame(_.bind(self.render, this));
 		}, 
 
 		loadTexture : function(url) { 
@@ -80,24 +91,41 @@ define([
 		},
 
 		resize: function() {
+			WIDTH = this.$el.width();
+			HEIGHT = this.$el.height();
 			renderer.setSize(this.$el.width(), this.$el.height())
 		},
 
+		onMouseMove: function(e) {
+			// easing = 0.01;
+			// mouseX = e.clientX;
+			// mouseY = e.clientY;
+		},
+
 		render: function() {
+			// if(easing > 0) {
+
+			// } else {
+			// 	easing = 0
+			// }
+			// easing -= 0.001	
+			// camera.position.x = 400 + (mouseX - WIDTH / 2) * 1 * easing;
+			// camera.position.y = -30 + (mouseY - HEIGHT / 2) * -1 * easing;
+			// camera.lookAt(CENTER)
 
 			var i = vertices.length;
 			var v;
 			var m = 0.0;
 
 
-			// Wave Algorythm to push verices around
+			// // Wave Algorythm to push verices around
 			while(--i > -1 ) {
 				v = vertices[i];
 				v.y =  v.x*Math.sin((v.x - (time+v.z/10)*2)*.1) *.1;
 				v.y +=  v.x/10*Math.cos((v.x/10 - time)*.2) *1;
 				v.y += v.z* Math.cos(v.z - time*.1)*.2;
 				v.y += Math.sin(v.z / 2 + time);
-				v.y *= v.x * .001;
+				v.y *=    (.1 + v.x * .001);
 			}
 
 			// Update time
