@@ -5,8 +5,6 @@ require.config({
 		'underscore': 'libs/underscore-min',
 		'three' : 'libs/Three',
 		'raf' : 'libs/RAF',
-		'signal' : 'libs/signals.min'
-
 	},
  
 	shim: {

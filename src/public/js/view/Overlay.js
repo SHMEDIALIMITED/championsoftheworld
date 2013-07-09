@@ -4,10 +4,9 @@
  */
 
 define([
-	'backbone',
-	'signal'],
+	'backbone'],
 
-	function(Backbone, Signal) {
+	function(Backbone) {
 
 		return Backbone.View.extend({
 
@@ -54,7 +53,6 @@ define([
 			},
 
 			initialize: function(options) {
-				this.countrySelected = new Signal();
 				var $option;
 				var $select = this.$el.find('select');
 				_.each(options.collection, function(country) {

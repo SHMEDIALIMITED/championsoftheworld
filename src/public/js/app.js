@@ -52,10 +52,6 @@ define([
 		 	webGL.resize();
 
 		 	overlay = new Overlay({collection:countries, hashtag:options.hashtag});
-		 	
-		 	overlay.countrySelected.add(function(country) {
-		 		webGL.loadTexture('img/webgl/' + country + '.jpg');
-		 	});
 
 		 	queueView = new QueView({collection:queue});
 		 	queue.add(options.collection);
