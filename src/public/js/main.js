@@ -4,7 +4,7 @@ require.config({
 		'backbone': 'libs/backbone-min',
 		'underscore': 'libs/underscore-min',
 		'three' : 'libs/Three',
-		'raf' : 'libs/RAF',
+		'raf' : 'libs/RAF'
 	},
  
 	shim: {

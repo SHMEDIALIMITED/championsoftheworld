@@ -7,7 +7,7 @@ module.exports = function(config) {
 	
 
 	api.index = function(req, res) {
-		Tweet.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, tweet) {
+		Tweet.findOne({ country: {$ne: 'false'} }, {}, { sort: { 'created_at' : -1 } }, function(err, tweet) {
 		  if(err || !tweet) {
 		  	console.log('Could not find any tweets:', err)
 		  	res.render('index', {layout:false,locals:{

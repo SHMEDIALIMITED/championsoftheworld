@@ -20,36 +20,25 @@ define([
 			onCountrySelected : function(e){
 
 				
-				var hashtag = this.options.hashtag;
 				var $tweeter = this.$el.find('#tweeter');
 				$tweeter.show();
 				$tweeter.find('iframe').remove();
-				// shorten URL and reload Tweet button with correct data attributes 
-				$.ajax({
-			        url: 'https://www.googleapis.com/urlshortener/v1/url?shortUrl=http://goo.gl/fbsS&key=AIzaSyANFw1rVq_vnIzT4vVOwIw3fF1qHXV7Mjw',
-			        type: 'POST',
-			        contentType: 'application/json; charset=utf-8',
-			        data: '{ longUrl: "' + 'http://hello.com?rand=' + Math.random() +'"}',
-			        dataType: 'json',
-			        success: function(response) {
-			        	console.log(response.id)
-			             var tweetBtn = $('<a></a>')
-				        .addClass('twitter-share-button')
-				        .attr('href', 'http://twitter.com/share')
-				        .attr('data-url', response.id)
-				        .attr('data-text', 'Come on ' + e.currentTarget.value)
-				        .attr('data-hashtags', hashtag)
-				        .attr('data-size', 'large')
-				        .attr('data-count', 'none');
-				       
-				        twttr.events.bind('tweet', function() {
-							$('#overlay').fadeOut('slow');	         	
-						});
+				
+	            var tweetBtn = $('<a></a>')
+		        .addClass('twitter-share-button')
+		        .attr('href', 'http://twitter.com/share')
+		        .attr('data-url', this.options.host)
+		        .attr('data-text', e.currentTarget.value)
+		        .attr('data-hashtags', this.options.hashtag)
+		        .attr('data-size', 'large')
+		        .attr('data-count', 'none');
+		       
+		        twttr.events.bind('tweet', _.bind(function(){
+		        	this.hide();
+		        }, this));
 
-						$('#tweeter').append(tweetBtn);
-				        twttr.widgets.load(tweetBtn.html());			        
-			        }
-			    });
+				$tweeter.append(tweetBtn);
+		        twttr.widgets.load(tweetBtn.html());
 			},
 
 			initialize: function(options) {
@@ -68,7 +57,7 @@ define([
 			},
 
 			hide: function() {
-				this.$el.hide();
+				$('#overlay').fadeOut('slow');	      
 			}
 
 		});

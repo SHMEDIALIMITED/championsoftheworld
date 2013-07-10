@@ -1,5 +1,4 @@
 var twitter = require('ntwitter');
-var current = {text:'Australia'};
 var Tweet = require('../models').Tweet;
 var countries = require('../models').Countries;
 
@@ -16,24 +15,20 @@ module.exports = function(app, config, io) {
 	twit.stream('statuses/filter', {track:config.hashtag}, function( stream) {
 		stream.on('data', function (data) {
 			var country = getCountryForText(data.text);
-			var tweet = new Tweet({tweet:data, country:country}); 
-			tweet.save();
+			
 			
 			if(!country) {
-				respondToError(data);
+				console.log('Invalid Country')
+				io.sockets.emit('invalid', data);
 				return;
 			}
 
-			
-			current = data;		
-	   		io.sockets.emit('update', tweet);	 
+			var tweet = new Tweet({tweet:data, country:country}); 
+			tweet.save();
+
+	   		io.sockets.emit('update', tweet);
 	  	});
 	});
-}
-
-function respondToError(data) {
-  // Let tweeter know that country did not validate
-  console.log('respond to error')
 }
 
 // private helper to validate tweet text if country is available

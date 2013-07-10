@@ -24,6 +24,7 @@ define([
 	var overlay;
 	var queueView;
 	var notification;
+	
 
 	return Backbone.View.extend({
 
@@ -44,6 +45,7 @@ define([
 
 			socket = io.connect(options.host);
 			socket.on('update', this.onAddedToQue);
+			socket.on('invalid', this.showValidationxError);
 
 			webGL = new WebGL();
 			$(window).resize(function() {
@@ -51,7 +53,7 @@ define([
 		 	});
 		 	webGL.resize();
 
-		 	overlay = new Overlay({collection:countries, hashtag:options.hashtag});
+		 	overlay = new Overlay({collection:countries, hashtag:options.hashtag, host:options.host});
 
 		 	queueView = new QueView({collection:queue});
 		 	queue.add(options.collection);
@@ -60,6 +62,18 @@ define([
 
 		 	this.showNextTweetFromQue();
 		 	setInterval(_.bind(this.showNextTweetFromQue , this), 20000);
+		},
+
+		onTweeted : function(url) {
+			tweetedURL = url;
+		},
+
+		showValidationxError : function(data) {
+			// Check if it was current user
+			console.log('showValidationxError', data.text, overlay.tweet)
+			if(data.text.indexOf(overlay.tweet) != -1) {
+				console.log('TWEET invalid')
+			}
 		},
 
 		startTweet : function() {
