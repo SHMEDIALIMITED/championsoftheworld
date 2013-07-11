@@ -1464,7 +1464,7 @@ p {
   margin-top: -6px;
   position: absolute;
   top: 50%;
-  background: transparent url(btn.twitter.png) 0 0 no-repeat; }
+  background: transparent url("img/btn.twitter.png") 0 0 no-repeat; }
 
 #tweet-btn .label {
   white-space: nowrap;
@@ -1505,14 +1505,6 @@ p {
   height: 50px;
   padding-left: 15px;
   -webkit-appearance: none; }
-
-.styled-select {
-  margin: 0 auto;
-  height: 50px;
-  width: 240px;
-  overflow: hidden;
-  background: url(down_arrow_select.jpg) no-repeat right #dddddd;
-  border: 1px solid #ccc; }
 
 #overlay form #tweeter {
   margin-top: 5px; }
@@ -1587,7 +1579,7 @@ footer a[href="http://shmedia.co.uk"] {
   bottom: 9px;
   right: 5px;
   width: 62px;
-  background: url("/css/img/shmedia.png") no-repeat;
+  background: url("img/shmedia.png") no-repeat;
   background-size: contain;
   text-indent: -9999px; }
 
