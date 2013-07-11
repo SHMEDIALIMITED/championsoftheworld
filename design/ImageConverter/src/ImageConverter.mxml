@@ -12,7 +12,13 @@
 			
 			import mx.controls.Alert;
 			
+			
+			// Scale for Desktop machines
+			//private var scaleFactor:int = 4;
+			
+			// Scale for Desktop mobile
 			private var scaleFactor:int = 4;
+			
 			private var files:Array;
 			private var index:int;
 			private var loader:Loader;
@@ -50,10 +56,10 @@
 					fileString += '"' + getExportName(file.name) + '",\n';
 				}
 				
-				Alert.show(fileString);
+				//Alert.show(fileString);
 				
 				
-				//processNextFile();
+				processNextFile();
 			}
 			
 			private function onSelectOutput(e:FileListEvent):void {
@@ -74,7 +80,7 @@
 			}
 			
 			private function onFileLoaded(e:Event):void {
-				saveBitmapThumb(loader.content);
+				saveBitmapMain(loader.content);
 			}
 			
 			private function saveBitmapThumb(object:DisplayObject):void {
@@ -125,10 +131,10 @@
 				
 				
 				
-				var bmp:BitmapData = new BitmapData(object.width * scaleFactor ,object.height * scaleFactor, false);
+				var bmp:BitmapData = new BitmapData(object.width * scaleFactor -1 ,object.height * scaleFactor -1, false);
 				var matrix:Matrix = new Matrix();
 				matrix.scale( scaleFactor, scaleFactor );
-				
+				matrix.translate(-1,-1);
 				
 				//object.scaleX = object.scaleY = scaleFactor;
 				bmp.draw(object, matrix,null,null,null,true);

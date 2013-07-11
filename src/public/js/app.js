@@ -31,6 +31,28 @@ define([
 	var t = 0;
 	
 
+	// private 
+	function hasWebGL() {
+
+		if (!window.WebGLRenderingContext) {
+		    // the browser doesn't even know what WebGL is
+		    return false;
+		  } else {
+		    var canvas = document.createElement("canvas");
+		    var context = canvas.getContext("webkit-3d");
+		    if (!context) {
+		    	context = canvas.getContext("moz-webgl");
+		    	if(!context) {
+		    		// browser supports WebGL but initialization failed.
+		    		return false;
+		    	}	
+		      	
+		     
+		    }
+		  }
+		  return true;
+	}
+
 	return Backbone.View.extend({
 
 
@@ -51,10 +73,13 @@ define([
 			socket = io.connect(options.host);
 			socket.on('update', this.onAddedToQue);
 			socket.on('invalid', this.showValidationxError);
-
+			console.log($.browser)
 			if($.browser.mobile) {
-				flag = new FlagFallback({basePath:'img/webgl/'});
+				flag = new FlagFallback({basePath:'img/mobile/'});
 				queueView = new QueView({collection:queue, basePath:'img/mobile/'});
+			}else if(!hasWebGL()) {
+				flag = new FlagFallback({basePath:'img/webgl/'});
+				queueView = new QueView({collection:queue, basePath:'img/webgl/'});
 			}else {
 				flag = new WebGL({basePath:'img/webgl/'});
 				queueView = new QueView({collection:queue, basePath:'img/webgl/'});
