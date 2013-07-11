@@ -3,6 +3,10 @@ var Tweet = require('../models').Tweet;
 var countries = require('../models').Countries;
 
 module.exports = function(app, config, io) {
+
+
+
+
 	var twit = new twitter(config.twitter);
 
 	//Heroku "doesn't support" websockets on the Cedar stack yet (no word on when they will). 
@@ -26,6 +30,8 @@ module.exports = function(app, config, io) {
 			var tweet = new Tweet({tweet:data, country:country}); 
 			tweet.save();
 
+
+			console.log('io::emit:update', tweet.country)
 	   		io.sockets.emit('update', tweet);
 	  	});
 	});

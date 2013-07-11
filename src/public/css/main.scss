@@ -88,16 +88,29 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ffffff', e
 -webkit-margin-end: 0px;
 -webkit-padding-start: 10px;}
 
-.queueit { 
-  background:url('Australia_thumb.gif') left no-repeat; 
-  background-position: center left;  
+.queueit {
+  position: relative; 
+  background: left no-repeat; 
+  background-position: center left;
+  background-size: contain;  
   width: 250px; height: 18px; 
   border-bottom:  solid 1px rgba(10, 10, 10, 0.5);  
   padding-bottom: 10px;
-  padding-left:40px;
   padding-top:10px;
   font-size: 1.6em;
 }
+
+.queueit i {
+  position:absolute;
+  width: 40px;
+  height: 20px;
+  background-size: contain;
+}
+
+.queueit span {
+  padding-left: 50px;
+}
+
 .queueit p {margin-left: 30px; font-size: 2em; -webkit-margin-after: 0px;
 -webkit-margin-start: 30px;
 -webkit-margin-end: 0px;

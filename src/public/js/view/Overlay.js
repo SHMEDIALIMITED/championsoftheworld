@@ -44,16 +44,26 @@ define([
 			initialize: function(options) {
 				var $option;
 				var $select = this.$el.find('select');
+
+				// Add initial label
+				$option = $('<option>Select a country</option>');
+				$option.attr('value', 'false');
+				$select.append($option);
+
 				_.each(options.collection, function(country) {
 					$option = $('<option>' + country + '</option>');
 					$option.attr('value', country);
 					$select.append($option);
-				});
+				}, this);
+			},
+
+			_addOption:function() {
+
 			},
 
 			show : function() {
 				this.$el.find('#tweeter').hide();
-				this.$el.show();
+				$('#overlay').fadeIn('fast');
 			},
 
 			hide: function() {

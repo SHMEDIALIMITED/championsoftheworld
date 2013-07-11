@@ -24,6 +24,8 @@ define([
 	var overlay;
 	var queueView;
 	var notification;
+
+	var t = 0;
 	
 
 	return Backbone.View.extend({
@@ -59,9 +61,17 @@ define([
 		 	queue.add(options.collection);
 		 	notification = new Notification({collection:queue});
 
+		 	//queueView.renderTest(countries);
 
 		 	this.showNextTweetFromQue();
 		 	setInterval(_.bind(this.showNextTweetFromQue , this), 20000);
+		},
+
+		test: function() {
+			var end = t+17;
+			if(end > countries.length) end = countries.length - 1;
+			queueView.renderTest(countries.slice(t, end));
+			t+= 17
 		},
 
 		onTweeted : function(url) {

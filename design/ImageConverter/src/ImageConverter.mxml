@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:WindowedApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+					   xmlns:s="library://ns.adobe.com/flex/spark" 
+					   xmlns:mx="library://ns.adobe.com/flex/mx" applicationComplete="init()">
+	<fx:Declarations> 
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.images.JPGEncoder;
+			
+			import mx.controls.Alert;
+			
+			private var scaleFactor:int = 4;
+			private var files:Array;
+			private var index:int;
+			private var loader:Loader;
+			private var file:File;
+			
+			private function init():void {
+				//				var fileDirectry:File = File.documentsDirectory.resolvePath("/Users/admin/Dropbox/flags/swfs/");
+				//				files = fileDirectry.getDirectoryListing();
+				index = 0;
+				
+				loader = new Loader();
+				loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onFileLoaded, false, 0 ,true);
+				
+				doFileRef();
+				//processNextFile();
+			}
+			
+			private function doFileRef():void {
+				file = new File();
+				file.addEventListener(FileListEvent.SELECT_MULTIPLE, onSelectInput);
+				//file.addEventListener(FileListEvent., onSelectOutput);
+				file.browseForOpenMultiple("Please select a file or three...");
+				
+			}
+			
+			private function onSelectInput(e:FileListEvent):void {
+				
+				
+				//e.target.browseForDirectory('select output directory');
+				
+				files = e.files;
+				
+				var fileString:String = "";
+				for each(var file:File in files) {
+					fileString += '"' + getExportName(file.name) + '",\n';
+				}
+				
+				Alert.show(fileString);
+				
+				
+				//processNextFile();
+			}
+			
+			private function onSelectOutput(e:FileListEvent):void {
+				Alert.show(e.toString());
+			}
+			
+			private function processNextFile():void {
+				if(index == files.length) {
+					Alert.show('done');
+					return;
+				}
+				loadFile(File(files[index]).url);
+				index++;
+			}
+			
+			private function loadFile(url:String):void {
+				loader.load(new URLRequest(url))
+			}
+			
+			private function onFileLoaded(e:Event):void {
+				saveBitmapThumb(loader.content);
+			}
+			
+			private function saveBitmapThumb(object:DisplayObject):void {
+				var ratio:Number = object.height / object.width;
+				
+				var sX:Number = 21 / ratio / object.width;
+				var sY:Number = 21 / object.height;
+				
+				var bmp:BitmapData = new BitmapData(20 / ratio,20 , false);
+				var matrix:Matrix = new Matrix();
+				matrix.scale( sX, sY );
+				matrix.tx = -1;
+				matrix.ty = -1;
+				
+				//object.scaleX = object.scaleY = scaleFactor;
+				bmp.draw(object, matrix,null,null,null,true);
+				
+				var jpg:JPGEncoder = new JPGEncoder(85);
+				
+				var name:String	= File(files[index-1]).name;
+				if(name.indexOf("[") != -1) {
+					name = name.substr(0,  name.indexOf("[")-1);
+				}
+				
+				if(name.indexOf("(") != -1) {
+					name = name.substr(0, name.indexOf("(")-1)	
+				}
+				
+				if(name.indexOf(".swf") != -1) {
+					name = name.substr(0,  name.length - 4);
+				}
+				//name = name.replace(" ","").replace(" ","").replace(" ","");
+				//name = name.toLowerCase();
+				var f:File = new File("/Users/admin/Documents/WORK/championsoftheworld/src/public/css/img/thumbs/" + name + ".jpg");
+				
+				
+				var stream:FileStream = new FileStream();
+				stream.open(f, FileMode.WRITE);
+				stream.writeBytes(jpg.encode(bmp));
+				stream.close();
+				processNextFile();
+				//stage.addChild(object);
+				
+			}
+			
+			private function saveBitmapMain(object:DisplayObject):void {
+				var ratio:Number = object.height / object.width;
+				
+				
+				
+				var bmp:BitmapData = new BitmapData(object.width * scaleFactor ,object.height * scaleFactor, false);
+				var matrix:Matrix = new Matrix();
+				matrix.scale( scaleFactor, scaleFactor );
+				
+				
+				//object.scaleX = object.scaleY = scaleFactor;
+				bmp.draw(object, matrix,null,null,null,true);
+				
+				var jpg:JPGEncoder = new JPGEncoder(85);
+				
+				var name:String	= File(files[index-1]).name;
+				if(name.indexOf("[") != -1) {
+					name = name.substr(0,  name.indexOf("[")-1);
+				}
+				
+				if(name.indexOf("(") != -1) {
+					name = name.substr(0, name.indexOf("(")-1)	
+				}
+				
+				if(name.indexOf(".swf") != -1) {
+					name = name.substr(0,  name.length - 4);
+				}
+				//name = name.replace(" ","").replace(" ","").replace(" ","");
+				//name = name.toLowerCase();
+				var f:File = new File("/Users/admin/Documents/WORK/championsoftheworld/src/public/img/webgl/" + name + ".jpg");
+				
+				
+				var stream:FileStream = new FileStream();
+				stream.open(f, FileMode.WRITE);
+				stream.writeBytes(jpg.encode(bmp));
+				stream.close();
+				processNextFile();
+				//stage.addChild(object);
+				
+			}
+			
+			protected function getExportName(importName:String):String {
+				var name:String	= importName;
+				if(name.indexOf("[") != -1) {
+					name = name.substr(0,  name.indexOf("[")-1);
+				}
+				
+				if(name.indexOf("(") != -1) {
+					name = name.substr(0, name.indexOf("(")-1)	
+				}
+				
+				if(name.indexOf(".swf") != -1) {
+					name = name.substr(0,  name.length - 4);
+				}
+				return name;
+			}
+		]]>
+	</fx:Script>
+</s:WindowedApplication>

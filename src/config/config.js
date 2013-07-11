@@ -23,7 +23,7 @@ module.exports = {
       app: {
         name: 'Web App'
       },
-      db: process.env.MONGOLAB_URI,
+      db: process.env.MONGOLAB_URI_STRIDER || process.env.MONGOLAB_URI,
       host : 'http://champions-of-the-world.herokuapp.com',
       twitter: {
         consumer_key: process.env.TWITTER_KEY,

@@ -21,14 +21,26 @@ define(
 				
 				
 				var $item = $('<li></li>');
+				var $icon = $('<i></i>');
 				$item.addClass('queueit');
-				$item.html(obj.get('tweet').user.screen_name);
+				$icon.css('background',  'url("img/webgl/' + obj.get('country') + '.jpg") left no-repeat')
+				$icon.css('background-size',  'contain')
+				$item.html('<span>'+obj.get('tweet').user.screen_name+'</span>');
+				
+				$item.prepend($icon)
 				this.$el.find('ul').prepend($item)
 			},
 
 			removeItem : function(obj) {
 				this.$el.find('ul li:last').remove();	
-			}
+			},
+
+			renderTest:function(countries) {
+				this.$el.find('ul').empty()
+				_.each(countries, function(c){
+					this.addItem(new Backbone.Model({country:c}));
+				}, this)
+			}	
 
 
 

@@ -30,7 +30,7 @@ require('./config/routes')(app, config);
 var server = http.createServer(app);
 
 // Bootstrap Twitter API Observer with instance of socket.io
-require('./app/controllers/twitter')(app,config, require('socket.io').listen(server));
+require('./app/controllers/twitter')(app,config, require('socket.io').listen(server,{ log: false }));
 
 // start listening
 server.listen(app.get('port'), function(){
