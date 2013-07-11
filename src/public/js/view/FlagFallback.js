@@ -41,7 +41,7 @@ define(
 			},
 
 			_onImageLoaded: function(e) {
-
+				this.resize();
 			}
 
 		});
