@@ -5,7 +5,9 @@ define([
 	'view/WebGL',
 	'view/Overlay',
 	'view/QueueView',
-	'view/Notification'
+	'view/Notification',
+	'view/FlagFallback',
+	'libs/detectmobilebrowser',
 
 	], function(
 		Router, 
@@ -14,13 +16,14 @@ define([
 		WebGL,
 		Overlay,
 		QueView,
-		Notification) {
+		Notification,
+		FlagFallback) {
 
 	var router;
 	var countries;
 	var queue;
 	var socket;
-	var webGL;
+	var flag;
 	var overlay;
 	var queueView;
 	var notification;
@@ -49,21 +52,28 @@ define([
 			socket.on('update', this.onAddedToQue);
 			socket.on('invalid', this.showValidationxError);
 
-			webGL = new WebGL();
+			if($.browser.mobile) {
+				flag = new FlagFallback({basePath:'img/mobile/'});
+				queueView = new QueView({collection:queue, basePath:'img/mobile/'});
+			}else {
+				flag = new WebGL({basePath:'img/webgl/'});
+				queueView = new QueView({collection:queue, basePath:'img/webgl/'});
+			}
+			overlay = new Overlay({collection:countries, hashtag:options.hashtag, host:options.host});
+
+
+			queue.add(options.collection);
+
+			notification = new Notification({collection:queue});
+
+			
 			$(window).resize(function() {
-				webGL.resize();
+				flag.resize();
 		 	});
-		 	webGL.resize();
-
-		 	overlay = new Overlay({collection:countries, hashtag:options.hashtag, host:options.host});
-
-		 	queueView = new QueView({collection:queue});
-		 	queue.add(options.collection);
-		 	notification = new Notification({collection:queue});
-
-		 	//queueView.renderTest(countries);
+		 	flag.resize();
 
 		 	this.showNextTweetFromQue();
+		 	
 		 	setInterval(_.bind(this.showNextTweetFromQue , this), 20000);
 		},
 
@@ -94,7 +104,7 @@ define([
 		showNextTweetFromQue: function() {
 			var tweet = queue.shift();
 			if(tweet) {
-				webGL.loadTexture('img/webgl/' + tweet.get('country') + '.jpg');
+				flag.loadTexture(tweet.get('country') + '.jpg');
 			}
 		},
 

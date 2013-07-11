@@ -6,7 +6,7 @@
 @import "form";
 @import "button";
 @import "a";
-@import "shadows";
+@import "helpers";
 
 
 
@@ -42,20 +42,35 @@ p {
 	font-size: 2em;
 }
 
-
+ 
 /**
  *  Custom Styles
  */
 
-#container {width:100%; height: 100%; position:absolute; padding:0px; margin:0px; overflow:hidden; 
-background: rgb(11,41,61); /* Old browsers */
-background: -moz-linear-gradient(top,  rgba(11,41,61,1) 0%, rgba(0,62,150,1) 16%, rgba(41,137,216,1) 45%, rgba(125,185,232,1) 69%, rgba(187,244,249,1) 100%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(11,41,61,1)), color-stop(16%,rgba(0,62,150,1)), color-stop(45%,rgba(41,137,216,1)), color-stop(69%,rgba(125,185,232,1)), color-stop(100%,rgba(187,244,249,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top,  rgba(11,41,61,1) 0%,rgba(0,62,150,1) 16%,rgba(41,137,216,1) 45%,rgba(125,185,232,1) 69%,rgba(187,244,249,1) 100%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top,  rgba(11,41,61,1) 0%,rgba(0,62,150,1) 16%,rgba(41,137,216,1) 45%,rgba(125,185,232,1) 69%,rgba(187,244,249,1) 100%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top,  rgba(11,41,61,1) 0%,rgba(0,62,150,1) 16%,rgba(41,137,216,1) 45%,rgba(125,185,232,1) 69%,rgba(187,244,249,1) 100%); /* IE10+ */
-background: linear-gradient(to bottom,  rgba(11,41,61,1) 0%,rgba(0,62,150,1) 16%,rgba(41,137,216,1) 45%,rgba(125,185,232,1) 69%,rgba(187,244,249,1) 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0b293d', endColorstr='#bbf4f9',GradientType=0 ); /* IE6-9 */
+#container {
+  width:100%; height: 100%; 
+  position:absolute; padding:0px; 
+  margin:0px; overflow:hidden;
+  background: #ddd; 
+}
+
+#container img {
+  position:absolute;
+  top:0px;
+  left: 0px;
+  @include shadow();
+}
+
+.fallback-landscape {
+   width: 100%;
+   @include translate(0, 0px, 50px);
+}
+
+.fallback-portrait {
+  width: 100%;
+  @include translate(90, 30%, 0px);
+
+   
 }
 
 #twitter {display:none;position:absolute; bottom:25px;  background: rgba(255,255,255,0.5);width:320px; height: 300px; }
@@ -111,9 +126,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1ffffff', e
 .queueit p {margin-left: 30px; font-size: 2em; -webkit-margin-after: 0px;
 -webkit-margin-start: 30px;
 -webkit-margin-end: 0px;
--webkit-padding-start: 10px;}
+-webkit-padding-start: 10px;
 
-#footer p {font-size: 1.6em;; color: #000; float:left;  width: 600px;  margin-top:6px; font-weight: bold; font-style: italic; padding: 0px 10px; }
+}
+
+#footer p {
+  font-size: 1.6em;
+  color: #000; 
+  float:left;  
+  width: 600px;  
+  margin-top:6px; 
+  font-weight: bold; 
+  font-style: italic; 
+  padding: 0px 10px;
+  @media (max-width: 900px) {
+   display: none;
+  }
+}
 
 #player { position: absolute; right: 0px; bottom: 0px;}
 

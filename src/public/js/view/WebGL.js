@@ -12,6 +12,8 @@ define([
 	
 	var self;
 
+	var basePath;
+
 	var time = 0.0;
 
 	// detail factor
@@ -41,7 +43,9 @@ define([
 		// 	'mousemove' : 'onMouseMove'
 		// },
 
-		initialize : function() {
+		initialize : function(options) {
+
+			basePath = options.basePath;
 
 			if(!hasWebGL()) {
 				this._initializeFallback();
@@ -124,7 +128,7 @@ define([
 			
 
 			// Flag Plane
-			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,10,10), mat);
+			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,2,2), mat);
 			plane.rotation.x = Math.PI / 2;	
 			plane.position.x = -20;
 			scene.add(plane);
@@ -139,7 +143,7 @@ define([
 		}, 
 
 		loadTexture : function(url) { 
-			mat.map = THREE.ImageUtils.loadTexture(url);
+			mat.map = THREE.ImageUtils.loadTexture(basePath + url);
 		},
 
 		resize: function() {
@@ -206,15 +210,21 @@ define([
 	});
 
 	function hasWebGL() {
+
 		if (!window.WebGLRenderingContext) {
 		    // the browser doesn't even know what WebGL is
 		    return false;
 		  } else {
 		    var canvas = document.createElement("canvas");
-		    var context = canvas.getContext("webgl");
+		    var context = canvas.getContext("webkit-3d");
 		    if (!context) {
-		      // browser supports WebGL but initialization failed.
-		     return false;
+		    	context = canvas.getContext("moz-webgl");
+		    	if(!context) {
+		    		// browser supports WebGL but initialization failed.
+		    		return false;
+		    	}	
+		      	
+		     
 		    }
 		  }
 		  return true;

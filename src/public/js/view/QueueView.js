@@ -8,11 +8,14 @@ define(
 
 	function(Backbone) {
 
+		var basePath;
+
 		return Backbone.View.extend({
 
 			el : '#queue',
 
-			initialize: function(){
+			initialize: function(options){
+				basePath = options.basePath;
 				this.collection.on('add', _.bind(this.addItem, this));
 				this.collection.on('remove', _.bind(this.removeItem, this));
 			},
@@ -23,7 +26,7 @@ define(
 				var $item = $('<li></li>');
 				var $icon = $('<i></i>');
 				$item.addClass('queueit');
-				$icon.css('background',  'url("img/webgl/' + obj.get('country') + '.jpg") left no-repeat')
+				$icon.css('background',  'url("' + basePath + obj.get('country') + '.jpg") left no-repeat')
 				$icon.css('background-size',  'contain')
 				$item.html('<span>'+obj.get('tweet').user.screen_name+'</span>');
 				
