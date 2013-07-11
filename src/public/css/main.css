@@ -1377,7 +1377,7 @@ p {
   padding-bottom: 10px;
   padding-top: 10px;
   font-size: 1.6em; }
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
     .queueit {
       width: 50px; } }
 
@@ -1389,7 +1389,7 @@ p {
 
 .queueit span {
   padding-left: 50px; }
-  @media (max-width: 900px) {
+  @media (max-width: 980px) {
     .queueit span {
       display: none; } }
 

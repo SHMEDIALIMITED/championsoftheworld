@@ -52,7 +52,7 @@ define([
 			socket.on('update', this.onAddedToQue);
 			socket.on('invalid', this.showValidationxError);
 
-			if(!$.browser.mobile) {
+			if($.browser.mobile) {
 				flag = new FlagFallback({basePath:'img/webgl/'});
 				queueView = new QueView({collection:queue, basePath:'img/mobile/'});
 			}else {

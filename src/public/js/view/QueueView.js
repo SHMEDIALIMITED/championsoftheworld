@@ -28,7 +28,7 @@ define(
 				$item.addClass('queueit');
 				$icon.css('background',  'url("' + basePath + obj.get('country') + '.jpg") left no-repeat')
 				$icon.css('background-size',  'contain')
-				//$item.html('<span>'+obj.get('tweet').user.screen_name+'</span>');
+				$item.html('<span>'+obj.get('tweet').user.screen_name+'</span>');
 				
 				$item.prepend($icon)
 				this.$el.find('ul').prepend($item)
