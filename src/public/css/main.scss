@@ -3,13 +3,10 @@
 	author : Patrick Wolleb patrick.wolleb@shmedia.co.uk
 */
 @import "reset";
-@import "grid";
-@import "container";
 @import "form";
 @import "button";
-@import "table";
-
 @import "a";
+@import "shadows";
 
 
 
@@ -223,35 +220,39 @@ top: 50%;
 }
 
 #overlay form #tweeter {
-  margin-top: 30px;
+  margin-top: 5px;
 }
 
 #overlay form {
-  text-align: center;
+  padding-left:40px;
   width: 500px;
-  height: 240px;
+  height: 200px;
   position: fixed;
   top: 50%;
   left: 50%;
   background: #fff;
   margin-left: -300px;
   margin-top: -150px;
-  border-radius: 2px;
+  border-radius: 3px;
+  @include shadow();
 } 
 
 .close-btn {
   background:#ddd;
   padding:10px;
   font-size: 1.6em;
+  padding:0px 5px;
 }
 
 #overlay form .close-btn {
-  float: right;
+  position:absolute;
+  top: 5px;
+  right: 5px;
 }
 
 #overlay h2{
-  font-size: 30px;
-  margin-top: 30px
+  font-size: 26px;
+  margin-top: 35px
 }
 
 #notification span {color: #00B1C6; }
@@ -268,4 +269,9 @@ top: 50%;
   position:fixed;
   bottom:5px;
   right: 5px;
+}
+
+select:focus {
+box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+outline: 0 none;
 }
