@@ -44,15 +44,18 @@ define([
  	THREE.Vector3.prototype.update = function() {
 		var _x = this.x;
        	var _y = this.y;
+       	var _z = this.z;
 
        	this.x += (_x - this.oldX);
        	this.y += (_y - this.oldY);
+       	this.z += (_z - this.oldZ);
 
        //	this.set({x: _x + _x - this.oldX});
         //this.set({y: _y + _y - this.oldY});
 
         this.oldX = _x;
         this.oldY = _y;
+        this.oldZ = _z;
 	}
 
 
@@ -93,9 +96,9 @@ define([
 			
 			this.$el.append(renderer.domElement);
 
-			mat = new THREE.MeshLambertMaterial({ 	ambient:0xff0000, 
+			mat = new THREE.MeshPhongMaterial({ 	ambient:0xff0000, 
 													
-													wireframe:true,
+														//wireframe:true,
 													reflectivity:0, 
 
 													shading:THREE.SmoothShading});
@@ -106,8 +109,11 @@ define([
 			scene.add(light);
 			
 
+			var segmentsX = 50;
+			var segmentsY = 4;
+
 			// Flag Plane
-			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,9,9), mat);
+			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,segmentsX,segmentsY), mat);
 			//plane.rotation.x = Math.PI / 8;	
 			//plane.position.x = -20;
 			scene.add(plane);
@@ -123,27 +129,45 @@ define([
 			// 100 vertices
 			// 9 * 9 = 81 sticks horizontal
 			// 9 * 9 = 81 sticks vertical
+			// 
+			var fold = segmentsX + 1;
 			var v, prev, n;
 			n = 0; 
 			for(var i = 0; i < vertices.length; i++) {
 				v = vertices[i];
-				console.log(v.z)
+				
 				// Fix 
-				if(i % 10 == 0) {
+				if(i % fold == 0 || i %fold == fold-1) {
 					v.fixed = true;
 				}
 
 				v.oldX = v.x;
 				v.oldY = v.y;
+				v.oldZ = v.z;
 
 				
-					if(i % 10 == 0) {
+					if(i % fold == 0) {
 						
-						v.fixed = true;
+						
 						n++;
-						for(var q = 0; q < 10; q++) {
+						for(var q = 0; q < fold; q++) {
 							var a = vertices[q];
-							var b = vertices[q + 10];
+							var b = vertices[q + fold];
+							addStick(a,b);
+
+						}
+
+						for(var q = 1; q < fold; q++) {
+							var a = vertices[q];
+							var b = vertices[q + fold];
+							
+							addStick(a,b)
+						}
+
+						for(var q = 0; q < fold-1; q++) {
+							var a = vertices[q];
+							var b = vertices[q + fold + 1];
+							console.log('here')
 							addStick(a,b)
 						}
 					} else {
@@ -254,13 +278,16 @@ define([
 			var point;
 			
 
-			var windY = Math.random();
+			
 
 			while( --i > -1 ) {
 				point = points[i];
 				if(point.fixed) continue;
-				point.y -= windY;
-				point.x += 2;
+				point.y -= .1 + Math.random();
+				point.y += .1 + Math.random();
+				point.z -= .1 + Math.random();
+				point.z += .1 + Math.random();
+				point.x += .1;
 				point.update();
 			}
 			
@@ -269,6 +296,151 @@ define([
 			while( --i > -1 ) {
 				sticks[i].update();
 			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
 		}
 	});
 

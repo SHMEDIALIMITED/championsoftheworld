@@ -22,36 +22,31 @@ define(	[],
 				var b = this.b;
 				var dx = b.x - a.x;
 	          	var dy = b.y - a.y;
-	          	var dist = Math.sqrt(dx * dx + dy * dy);
+	          	var dz = b.z - a.z;
+	          	var dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
 	          
 	          	var diff = this.length - dist;
 	          	
-	          	
-	          	var offsetX = (diff * dx / dist) / 2;
-	          	var offsetY = (diff * dy / dist) / 2;
+	          	// 1.1 is rigid but unstable  
+	          	var q = 1.1 
+	          	var offsetX = (diff * dx / dist) / q;
+	          	var offsetY = (diff * dy / dist) / q;
+	          	var offsetZ = (diff * dz / dist) / q;
 		  		
+
 		  		if(!a.fixed) {
 		  			a.x -= offsetX;	
 		  			a.y -= offsetY;
+		  			a.z -= offsetZ;
 		  		}
 		  		
 				
 		  		if(!b.fixed) {
 		  			b.x += offsetX;	
 		  			b.y += offsetY;
+		  			b.z += offsetZ;
 		  		}
-				
-				
-		  		
-
-		  		// this.set('x', (a.get('x') + b.get('x')) * 0.5);
-		  		// this.set('y', (a.get('y') + b.get('y')) * 0.5);
-		    //   	this.set('rotation', (Math.atan2((b.get('x') -  a.get('x')) , (a.get('y') - b.get('y') ) )* 180 / Math.PI + 90));
-		      
-		
-		    //     this._diff = diff;
 			}
 
 			return VerletStick;
-			
 		});
