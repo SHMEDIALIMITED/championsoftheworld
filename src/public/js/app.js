@@ -7,7 +7,7 @@ define([
 	'view/QueueView',
 	'view/Notification',
 	'view/FlagFallback',
-	'soundcloud',
+	'view/SoundCloud',
 	'libs/detectmobilebrowser',
 
 	], function(
@@ -19,7 +19,7 @@ define([
 		QueView,
 		Notification,
 		FlagFallback,
-		SC) {
+		SoundCloud) {
 
 	var router;
 	var countries;
@@ -57,30 +57,7 @@ define([
 		  return true;
 	}
 
-	function fadeInSound(amount) {
-		s = sound;
-		console.log('FADE', s)
-		var vol = s.volume;
-		if (vol == 100) return false;
-
-		s.setVolume(Math.min(100,vol+amount));
-		
-		setTimeout(function(){
-						console.log('FADE CALL') 
-			fadeInSound(amount)
-		},20);
-	}
-
-	function fadeOutSound(amount) {
-		var s = sound;
-		var vol = s.volume;
-		if (vol == 0) {
-			return false;
-			s.stop();
-		}
-		s.setVolume(Math.max(0,vol-amount));
-		setTimeout(function(){fadeOutSound(amount)},20);
-	}
+	
 
 	return Backbone.View.extend({
 
@@ -126,44 +103,18 @@ define([
 		 	});
 		 	flag.resize();
 
+
+		 	sound = new SoundCloud({client_id: options.soundcloud});
+		 	sound.load('/tracks/58865296');
+
+		 	console.log(sound)	
+
 		 	this.showNextTweetFromQue();
 		 	
 		 	setInterval(_.bind(this.showNextTweetFromQue , this), 20000);
 
 
-		 	SC.initialize({
-			  client_id: options.soundcloud
-			});
-
-			SC.stream("/tracks/58865296", function(track){
-
-			  sound = track
-			  
-			  console.log(sound )
-			  
-			  sound.load({position:38600, onload : function() {
-			  	
-			  	console.log('FINISHED')
-			  	sound.setVolume(0);
-			  	sound.play();
-			  	fadeInSound(5);
-
-
-			  }});
-
-			  sound.onPosition(77000, function() {
-			  	fadeOutSound(5);
-			  });	
-			  
-
-			  
-
-
-			});
-
-			
-
-			
+		 	
 		},
 
 		test: function() {
@@ -194,12 +145,8 @@ define([
 			var tweet = queue.shift();
 			if(tweet) {
 				flag.loadTexture(tweet.get('country') + '.jpg');
-				if(sound) {
-					sound.setPosition(38600);
-					sound.setVolume(0);
-			  		sound.play();
-			  		fadeInSound(5);
-				}
+				console.log(sound)
+				if(sound)sound.play(39000, 77000);
 			}
 		},
 

@@ -72,7 +72,12 @@ define([
 			
 			this.$el.append(renderer.domElement);
 
-			mat = new THREE.MeshLambertMaterial({ ambient:0xff0000, reflectivity:0, shading:THREE.SmoothShading});
+			mat = new THREE.MeshPhongMaterial({ 	ambient:0xff0000, 
+													
+												
+													reflectivity:0, 
+
+													shading:THREE.SmoothShading});
 			this.material = mat;
 			
 			light = new THREE.DirectionalLight(0xDDCCCC, 1);
