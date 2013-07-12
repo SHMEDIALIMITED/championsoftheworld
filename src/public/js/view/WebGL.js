@@ -47,10 +47,6 @@ define([
 
 			basePath = options.basePath;
 
-			if(!hasWebGL()) {
-				this._initializeFallback();
-				return;
-			}
 
 			self = this;
 
@@ -100,52 +96,7 @@ define([
 			requestAnimFrame(_.bind(self.render, this));
 		}, 
 
-		_initializeFallback : function() {
-
 		
-
-			self = this;
-
-			renderer = new THREE.CanvasRenderer();
-			camera = new THREE.PerspectiveCamera(  VIEW_ANGLE,
-			                                ASPECT,
-			                                NEAR,
-			                                FAR  );
-			scene = new THREE.Scene();
-			scene.add(camera);
-
-			// the camera starts at 0,0,0 so pull it back
-			camera.position.z = 300;
-			camera.position.x = 410;
-			camera.position.y = -30;
-			camera.rotation.x = .1
-			camera.rotation.y = .05//.2// start the renderer
-			renderer.setSize(WIDTH, HEIGHT);
-			
-			this.$el.append(renderer.domElement);
-
-			mat = new THREE.MeshBasicMaterial({ ambient:0xff0000, reflectivity:0, shading:THREE.SmoothShading});
-			this.material = mat;
-			
-			light = new THREE.DirectionalLight(0xDDCCCC, 1);
-			light.position.z = 100;
-			scene.add(light);
-			
-
-			// Flag Plane
-			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,2,2), mat);
-			plane.rotation.x = Math.PI / 2;	
-			plane.position.x = -20;
-			scene.add(plane);
-			
-			// Populate the array of attributes for animtion in update call
-			vertices = plane.geometry.vertices;
-			for(var v = 0; v < vertices.length; v++) {
-				vertices[v].x += 410;
-			}
-
-			requestAnimFrame(_.bind(self.render, this));
-		}, 
 
 		loadTexture : function(url) { 
 			mat.map = THREE.ImageUtils.loadTexture(basePath + url);
@@ -214,24 +165,4 @@ define([
 		}
 	});
 
-	function hasWebGL() {
-
-		if (!window.WebGLRenderingContext) {
-		    // the browser doesn't even know what WebGL is
-		    return false;
-		  } else {
-		    var canvas = document.createElement("canvas");
-		    var context = canvas.getContext("webkit-3d");
-		    if (!context) {
-		    	context = canvas.getContext("moz-webgl");
-		    	if(!context) {
-		    		// browser supports WebGL but initialization failed.
-		    		return false;
-		    	}	
-		      	
-		     
-		    }
-		  }
-		  return true;
-	}
 });
