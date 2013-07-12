@@ -16,7 +16,8 @@ module.exports = function(config) {
 				description:'Flag WebGL',
 				queue : '[]',
 				host : config.host,
-				hashtag: config.hashtag}
+				hashtag: config.hashtag,
+				scid: config.soundcloud.client_id}
 			});
 		  }else {
 
@@ -36,7 +37,8 @@ module.exports = function(config) {
 					description:'Flag WebGL',
 					queue : JSON.stringify(tweets),
 					host : config.host,
-					hashtag: config.hashtag},
+					hashtag: config.hashtag,
+					scid: config.soundcloud.client_id}
 				});
 			})
 		  	

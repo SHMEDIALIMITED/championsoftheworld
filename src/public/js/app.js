@@ -7,6 +7,7 @@ define([
 	'view/QueueView',
 	'view/Notification',
 	'view/FlagFallback',
+	'soundcloud',
 	'libs/detectmobilebrowser',
 
 	], function(
@@ -17,7 +18,8 @@ define([
 		Overlay,
 		QueView,
 		Notification,
-		FlagFallback) {
+		FlagFallback,
+		SC) {
 
 	var router;
 	var countries;
@@ -27,9 +29,11 @@ define([
 	var overlay;
 	var queueView;
 	var notification;
+	var sound;
 
 	var t = 0;
 	
+	// https://soundcloud.com/search?q=We%20are%20the%20champions
 
 	// private 
 	function hasWebGL() {
@@ -100,6 +104,15 @@ define([
 		 	this.showNextTweetFromQue();
 		 	
 		 	setInterval(_.bind(this.showNextTweetFromQue , this), 20000);
+
+
+		 	SC.initialize({
+			  client_id: options.soundcloud
+			});
+
+			SC.stream("/tracks/58865296", {autoPlay:true, loops:100}, function(track){
+			  sound = track
+			});
 		},
 
 		test: function() {

@@ -4,7 +4,8 @@ require.config({
 		'backbone': 'libs/backbone-min',
 		'underscore': 'libs/underscore-min',
 		'three' : 'libs/Three',
-		'raf' : 'libs/RAF'
+		'raf' : 'libs/RAF',
+		'soundcloud' : 'http://connect.soundcloud.com/sdk'
 	},
  
 	shim: {
@@ -22,6 +23,10 @@ require.config({
 
 		'raf' : {
 			exports : 'requestAnimFrame'
+		},
+
+		'soundcloud': {
+			exports : 'SC'
 		}	
 	}
 });
@@ -34,6 +39,6 @@ require([
 	var app;
 
 	$(function() {
-		app = new App({host:window.COTW_HOST, collection:window.COTW_QUEUE, hashtag:window.COTW_HASHTAG});
+		app = new App({host:window.COTW_HOST, collection:window.COTW_QUEUE, hashtag:window.COTW_HASHTAG, soundcloud: window.SC_ID});
 	});
 });

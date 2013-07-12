@@ -320,24 +320,39 @@ top: 50%;
   right: 5px;
 }
 
-select:focus {
-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
-outline: 0 none;
+
+#credits {
+  position:fixed;
+  bottom: 32px; left:5px;
+  width: 265px;
+  font-size: 14px;
 }
 
-footer a[href="http://shmedia.co.uk"] {
-  position:fixed;
-  bottom:9px;
-  right: 5px; 
-  width: 62px;
-  background: url('img/shmedia.png') no-repeat;
+
+footer #credits a[href="http://shmedia.co.uk"] {
+  position:relative;
+  font-size: 14px;
+}
+footer #credits a[href="http://cargocollective.com/yonialter"] {
+  display: inline-block;
+  position:relative;
+  font-size: 14px;
+  margin-bottom:2px;
+}
+
+footer #credits a[href="http://soundcloud.com/"] {
+  display: block;
+  float:left;
+  width: 60px;
+  height: 38px;
+  background: url('img/soundcloud.png');
   background-size:contain;
   text-indent: -9999px;
+  margin-right:5px; 
 }
-footer a[href="http://cargocollective.com/yonialter"] {
-  position:fixed;
-  bottom:7px;
-  right: 80px; 
-  font-size: 14px;
-  
+
+footer #credits a[href="http://soundcloud.com/jawnsolo/queen-we-are-the-champions"] {
+  display: block;
+  background-size:contain;
+  font-size: 10px
 }

@@ -14,6 +14,10 @@ module.exports = {
         access_token_key: '22387661-xyP2A4NB7WbSJ5inouaLvXFncnLI0Tk7BwoquIpRw',
         access_token_secret: 'OzQSN1gWAiOOb4IazfSttpX4Qv0uoVDV4Fwox7GjqI'
       },
+      soundcloud : {
+        client_id : 'f25f647eec0a3cbb3dc868cbde9774a8',
+        client_secret : '6c9874aeb126057816d314d7f3232429'
+      },
       hashtag : 'KeepOnPushing'
       
     }
@@ -30,6 +34,10 @@ module.exports = {
         consumer_secret: process.env.TWITTER_SECRET,
         access_token_key: process.env.TWITTER_TOKEN_KEY,
         access_token_secret: process.env.TWITTER_TOKEN_SECRET
+      },
+      soundcloud : {
+        client_id : process.env.SC_CLIENT_ID,
+        client_secret : process.env.SC_CLIENT_SECRET
       },
       hashtag : 'championsoftheworld'
 
