@@ -7,8 +7,9 @@
 define([
 	'backbone',
 	'three',
-	'raf'
-	], function(Backbone, THREE, requestAnimFrame) {
+	'raf',
+	'model/VerletStick'
+	], function(Backbone, THREE, requestAnimFrame, VerletStick) {
 	
 	var self;
 
@@ -31,13 +32,36 @@ define([
 
 	var CENTER = new THREE.Vector3(400,0,0)    
 
-	var renderer, camera, scene, mat, light, plane, vertices;
+	var renderer, camera, scene, mat, light, plane, vertices, sticks;
 
 	var mouseX, mouseY, easing = 0.0;
+
+
+
+
+
+ 	// Extend THREE.Vector3
+ 	THREE.Vector3.prototype.update = function() {
+		var _x = this.x;
+       	var _y = this.y;
+
+       	this.x += (_x - this.oldX);
+       	this.y += (_y - this.oldY);
+
+       //	this.set({x: _x + _x - this.oldX});
+        //this.set({y: _y + _y - this.oldY});
+
+        this.oldX = _x;
+        this.oldY = _y;
+	}
+
+
 
 	return Backbone.View.extend({
 
 		el: '#container',
+
+
 
 		// events :{
 		// 	'mousemove' : 'onMouseMove'
@@ -58,19 +82,20 @@ define([
 			scene = new THREE.Scene();
 			scene.add(camera);
 
+
+
 			// the camera starts at 0,0,0 so pull it back
-			camera.position.z = 300;
-			camera.position.x = 410;
-			camera.position.y = -30;
-			camera.rotation.x = .1
-			camera.rotation.y = .05//.2// start the renderer
+			camera.position.z = 500;
+			//camera.position.y = 500;
+			//camera.rotation.x = -Math.PI / 2;
+			//camera.rotation.y = .05//.2// start the renderer
 			renderer.setSize(WIDTH, HEIGHT);
 			
 			this.$el.append(renderer.domElement);
 
-			mat = new THREE.MeshPhongMaterial({ 	ambient:0xff0000, 
+			mat = new THREE.MeshLambertMaterial({ 	ambient:0xff0000, 
 													
-												
+													wireframe:true,
 													reflectivity:0, 
 
 													shading:THREE.SmoothShading});
@@ -82,18 +107,74 @@ define([
 			
 
 			// Flag Plane
-			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,detail*100,25), mat);
-			plane.rotation.x = Math.PI / 2;	
-			plane.position.x = -20;
+			plane = new THREE.Mesh(  new THREE.PlaneGeometry(400,300,9,9), mat);
+			//plane.rotation.x = Math.PI / 8;	
+			//plane.position.x = -20;
 			scene.add(plane);
 			
 			// Populate the array of attributes for animtion in update call
 			vertices = plane.geometry.vertices;
-			for(var v = 0; v < vertices.length; v++) {
-				vertices[v].x += 410;
+			
+
+			
+			sticks = [];
+
+
+			// 100 vertices
+			// 9 * 9 = 81 sticks horizontal
+			// 9 * 9 = 81 sticks vertical
+			var v, prev, n;
+			n = 0; 
+			for(var i = 0; i < vertices.length; i++) {
+				v = vertices[i];
+				console.log(v.z)
+				// Fix 
+				if(i % 10 == 0) {
+					v.fixed = true;
+				}
+
+				v.oldX = v.x;
+				v.oldY = v.y;
+
+				
+					if(i % 10 == 0) {
+						
+						v.fixed = true;
+						n++;
+						for(var q = 0; q < 10; q++) {
+							var a = vertices[q];
+							var b = vertices[q + 10];
+							addStick(a,b)
+						}
+					} else {
+						
+						// add horizontal sticks
+						addStick(prev,v)	
+					}
+					
+				
+
+				prev = v;
 			}
 
-			requestAnimFrame(_.bind(self.render, this));
+			console.log(v)
+
+			// add vertical sticks
+			// i = 0
+			// for(; i< 9) 
+
+			function addStick(a,b) {
+				//console.log('addStick');
+				sticks.push(new VerletStick(a,b));
+			}
+
+			//console.log(sticks)
+
+			this.$el.click(_.bind(function(){
+				this.render();
+			}, this));
+
+			//requestAnimFrame(_.bind(self.render, this));
 		}, 
 
 		
@@ -115,6 +196,7 @@ define([
 		},
 
 		render: function() {
+			console.log('RENDER')
 			// if(easing > 0) {
 
 			// } else {
@@ -125,20 +207,22 @@ define([
 			// camera.position.y = -30 + (mouseY - HEIGHT / 2) * -1 * easing;
 			// camera.lookAt(CENTER)
 
-			var i = vertices.length;
-			var v;
-			var m = 0.0;
-
+			// var i = vertices.length;
+			// var v;
+			// var m = 0.0;
+		
+			//camera.rotation.x += Math.PI;
+			this.updatePhysics();
 
 			// // Wave Algorythm to push verices around
-			while(--i > -1 ) {
-				v = vertices[i];
-				v.y =  v.x*Math.sin((v.x - (time+v.z/10)*2)*.1) *.1;
-				v.y +=  v.x/10*Math.cos((v.x/10 - time)*.2) *1;
-				v.y += v.z* Math.cos(v.z - time*.1)*.2;
-				v.y += Math.sin(v.z / 2 + time);
-				v.y *=    (.1 + v.x * .001);
-			}
+			// while(--i > -1 ) {
+			// 	v = vertices[i];
+			// 	v.y =  v.x*Math.sin((v.x - (time+v.z/10)*2)*.1) *.1;
+			// 	v.y +=  v.x/10*Math.cos((v.x/10 - time)*.2) *1;
+			// 	v.y += v.z* Math.cos(v.z - time*.1)*.2;
+			// 	v.y += Math.sin(v.z / 2 + time);
+			// 	v.y *=    (.1 + v.x * .001);
+			// }
 
 			// Update time
 			time += 0.1;
@@ -161,7 +245,30 @@ define([
 			
 			renderer.render(scene, camera);
 			
-			requestAnimFrame(self.render);
+			requestAnimFrame(_.bind(this.render, self));
+		},
+
+		updatePhysics : function (){
+			var points = vertices;
+			i = points.length;
+			var point;
+			
+
+			var windY = Math.random();
+
+			while( --i > -1 ) {
+				point = points[i];
+				if(point.fixed) continue;
+				point.y -= windY;
+				point.x += 2;
+				point.update();
+			}
+			
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
 		}
 	});
 

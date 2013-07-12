@@ -107,7 +107,7 @@ define([
 		 	sound = new SoundCloud({client_id: options.soundcloud});
 		 	sound.load('/tracks/58865296');
 
-		 	console.log(sound)	
+		 
 
 		 	this.showNextTweetFromQue();
 		 	
@@ -145,7 +145,6 @@ define([
 			var tweet = queue.shift();
 			if(tweet) {
 				flag.loadTexture(tweet.get('country') + '.jpg');
-				console.log(sound)
 				if(sound)sound.play(39000, 77000);
 			}
 		},

@@ -3,7 +3,7 @@ require.config({
 		'jquery': 'libs/jquery-1.8.3.min',
 		'backbone': 'libs/backbone-min',
 		'underscore': 'libs/underscore-min',
-		'three' : 'libs/Three',
+		'three' : 'libs/three_r58',
 		'raf' : 'libs/RAF',
 		'soundcloud' : 'http://connect.soundcloud.com/sdk'
 	},
