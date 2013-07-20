@@ -88,7 +88,7 @@ define([
 
 
 			// the camera starts at 0,0,0 so pull it back
-			camera.position.z = 500;
+			camera.position.z =350;
 			//camera.position.y = 500;
 			//camera.rotation.x = -Math.PI / 2;
 			//camera.rotation.y = .05//.2// start the renderer
@@ -105,11 +105,11 @@ define([
 			this.material = mat;
 			
 			light = new THREE.DirectionalLight(0xDDCCCC, 1);
-			light.position.z = 100;
+			light.position.z = 2;
 			scene.add(light);
 			
 
-			var segmentsX = 50;
+			var segmentsX = 100;
 			var segmentsY = 4;
 
 			// Flag Plane
@@ -418,6 +418,50 @@ define([
 				sticks[i].update();
 			}
 
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
+			i = sticks.length;
+			while( --i > -1 ) {
+				sticks[i].update();
+			}
 
 			i = sticks.length;
 			while( --i > -1 ) {
