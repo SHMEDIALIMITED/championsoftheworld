@@ -198,7 +198,7 @@ define([
 				this.render();
 			}, this));
 
-			//requestAnimFrame(_.bind(self.render, this));
+			requestAnimFrame(_.bind(self.render, this));
 		}, 
 
 		
@@ -353,137 +353,6 @@ define([
 				sticks[i].update();
 			}
 
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
-			i = sticks.length;
-			while( --i > -1 ) {
-				sticks[i].update();
-			}
 
 		}
 	});
