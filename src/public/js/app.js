@@ -30,6 +30,7 @@ define([
 	var queueView;
 	var notification;
 	var sound;
+    var tweet;
 
 	var t = 0;
 	
@@ -74,11 +75,16 @@ define([
 			Backbone.history.start();
 
 			countries = new CountryModel();
-			queue = new Backbone.Collection();
+            var Queue = Backbone.Collection.extend({
+                model : Tweet
+            })
+
+			queue = new Queue();
 
 			socket = io.connect(options.host);
 			socket.on('update', this.onAddedToQue);
 			socket.on('invalid', this.showValidationxError);
+            socket.on('heartbeat', this.showNextTweetFromQue);
 			console.log($.browser)
 			if($.browser.mobile) {
 				flag = new FlagFallback({basePath:'img/mobile/'});
@@ -95,6 +101,8 @@ define([
 
 			queue.add(options.collection);
 
+
+
 			notification = new Notification({collection:queue});
 
 			
@@ -107,11 +115,11 @@ define([
 		 	sound = new SoundCloud({client_id: options.soundcloud});
 		 	sound.load('/tracks/58865296');
 
-		 	console.log(sound)	
+		 	console.log(this)
 
 		 	this.showNextTweetFromQue();
 		 	
-		 	setInterval(_.bind(this.showNextTweetFromQue , this), 20000);
+		 	//setInterval(_.bind(this.showNextTweetFromQue , this), 60000);
 
 
 		 	
@@ -142,10 +150,14 @@ define([
 
 		
 		showNextTweetFromQue: function() {
-			var tweet = queue.shift();
+            if(tweet && tweet.get('queued')) tweet.save();
+			tweet = queue.shift();
 			if(tweet) {
+
+                console.log(tweet)
+
+
 				flag.loadTexture(tweet.get('country') + '.jpg');
-				console.log(sound)
 				if(sound)sound.play(39000, 77000);
 			}
 		},
@@ -154,11 +166,14 @@ define([
 			
 			var tweet = new Tweet(data)
 
+
+            console.log('>>>> ADD', tweet)
+
 			// Validate tweet
 			if(tweet.get('country')) {
 				queue.add(tweet);
 			} else {
-				// Let user know by theeting back
+				// Let user know by theething back
 			}
 		}
 	})

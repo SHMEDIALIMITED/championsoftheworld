@@ -138,6 +138,7 @@ define([
 				v.y += v.z* Math.cos(v.z - time*.1)*.2;
 				v.y += Math.sin(v.z / 2 + time);
 				v.y *=    (.1 + v.x * .001);
+
 			}
 
 			// Update time

@@ -6,6 +6,7 @@ module.exports = {
       app: {
         name: 'Web App Dev'
       },
+      heartbeat : 40000,
       db: 'mongodb://localhost/championsoftheworld',
       host : 'http://localhost',
       twitter: {
@@ -27,6 +28,7 @@ module.exports = {
       app: {
         name: 'Web App'
       },
+      heartbeat : 20000,
       db: process.env.MONGOLAB_URI_STRIDER || process.env.MONGOLAB_URI,
       host : 'http://champions-of-the-world.herokuapp.com',
       twitter: {

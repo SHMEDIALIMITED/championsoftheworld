@@ -27,7 +27,7 @@ module.exports = function(app, config, io) {
 				return;
 			}
 
-			var tweet = new Tweet({tweet:data, country:country}); 
+			var tweet = new Tweet({name:data.user.screen_name, country:country});
 			tweet.save();
 
 
@@ -35,6 +35,11 @@ module.exports = function(app, config, io) {
 	   		io.sockets.emit('update', tweet);
 	  	});
 	});
+
+    setInterval(function() {
+        io.sockets.emit('heartbeat');
+    }, config.heartbeat);
+
 }
 
 // private helper to validate tweet text if country is available

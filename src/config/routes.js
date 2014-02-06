@@ -3,9 +3,11 @@
 module.exports = function (app, config) { 
 
 	var pages = require('../app/controllers/pages')(config);
-	// Web App
+
+	// Web App index
 	app.get('/', pages.index);
 
-	// FB Canvas App
-	app.post('/', pages.canvas);
+    // Update tweet
+    app.put('/:id', pages.updateItem);
+
 }

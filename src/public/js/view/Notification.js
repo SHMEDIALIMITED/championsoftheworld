@@ -18,7 +18,7 @@ define(
 				
 				var $user = $('<span></span>');
 				$user.addClass('username');
-				$user.html('@' + obj.get('tweet').user.screen_name);
+				$user.html('@' + obj.get('name'));
 				
 		
 

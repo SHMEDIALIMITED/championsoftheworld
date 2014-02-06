@@ -2,9 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;  
 
 var Tweet = new Schema({
-	tweet : {type: Schema.Types.Mixed},
+	name : {type: String},
 	country : {type: String},
-	created_at: {type: Date, default:Date.now}
+    queued : {type : Boolean, default: true},
+    created_at: {type: Date, default:Date.now}
 });
 
 

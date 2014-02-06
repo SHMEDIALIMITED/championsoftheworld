@@ -1,3 +1,5 @@
+var ObjectId = require('mongoose').Schema.Types.ObjectId;
+
 var Tweet = require('../models').Tweet;
 
 
@@ -7,50 +9,47 @@ module.exports = function(config) {
 	
 
 	api.index = function(req, res) {
-		Tweet.findOne({ country: {$ne: 'false'} }, {}, { sort: { 'created_at' : -1 } }, function(err, tweet) {
-		  if(err || !tweet) {
-		  	console.log('Could not find any tweets:', err)
-		  	res.render('index', {layout:false,locals:{
-				version:config.version, 
-				title: 'Champions of the World', 
-				description:'Flag WebGL',
-				queue : '[]',
-				host : config.host,
-				hashtag: config.hashtag,
-				scid: config.soundcloud.client_id}
-			});
-		  }else {
 
-		  	var start = new Date();
-			start.setMilliseconds(start.getMilliseconds() - 20000);
+        var start = new Date();
+        start.setMilliseconds(start.getMilliseconds() - 60000);
+        var end = new Date();
 
-			var end = new Date();
-			
-			Tweet.find({"created_at": {"$gte": start, "$lt": end}}, function(err, tweets) {
+        Tweet.find({"queued": true}).sort('_id').exec(function(err, tweets) {
 
-				if(tweets.length == 0) {
-					tweets.push(tweet);
-				}
-				res.render('index', {layout:false,locals:{
-					version:config.version, 
-					title: 'Champions of the World', 
-					description:'Flag WebGL',
-					queue : JSON.stringify(tweets),
-					host : config.host,
-					hashtag: config.hashtag,
-					scid: config.soundcloud.client_id}
-				});
-			})
-		  	
-		 //  	twit.get('/statuses/show/' + tweet.tweetId + '.json', {include_entities:true}, function(err,data) {
-		 //  		console.log('EMIT INIT', err, tweet.tweetId)
-		 //    	io.sockets.emit('init', {text:'Switzerland'});
-			// });
-		  }
-		});
-		
-		
+            console.log(err, tweets)
+
+            if(tweets.length == 0) {
+                Tweet.find().sort('-_id').limit(1).exec(function(err, tweets) {
+                    return res.render('index', {layout:false,locals:{
+                        version:config.version,
+                        title: 'Champions of the World',
+                        description:'Flag WebGL',
+                        queue : JSON.stringify(tweets),
+                        host : config.host,
+                        hashtag: config.hashtag,
+                        scid: config.soundcloud.client_id}
+                    });
+                });
+            } else {
+                return res.render('index', {layout:false,locals:{
+                    version:config.version,
+                    title: 'Champions of the World',
+                    description:'Flag WebGL',
+                    queue : JSON.stringify(tweets),
+                    host : config.host,
+                    hashtag: config.hashtag,
+                    scid: config.soundcloud.client_id}
+                });
+            }
+        });
 	}
+
+    api.updateItem = function(req, res) {
+
+        Tweet.update({_id: req.params.id}, {queued : false}, function(err ,tweet) {
+            console.log('UPDATED', err, tweet);
+        });
+    }
 
 	api.canvas = function(req, res) {
 		res.redirect('/');
