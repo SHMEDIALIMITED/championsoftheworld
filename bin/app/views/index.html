@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' type="text/css" href='css/main.css' />
+    <script src="/socket.io/socket.io.js"></script>
+    <script data-main="js/main" src="js/libs/require-min.js"></script>
+    <script type="text/javascript">
+      window.COTW_QUEUE = <%-queue%>;
+      window.COTW_HOST = '<%-host%>';
+      window.COTW_HASHTAG = '<%=hashtag%>';
+      window.SC_ID = '<%=scid%>';
+    </script>
+
+    <meta name="viewport" content="initial-scale=1, , minimum-scale=1, maximum-scale=1">
+
+  </head>
+  <body>
+
+    <header id="notification">
+      <p>
+        <span class="username">@PATRICK WOLLEB</span> GO TEAM SWITZERLAND <span class="last-tweet">5 sceonds ago</span>
+      </p>
+    </header>
+
+    <div id="container"></div>
+    
+
+
+    <aside id="queue">
+      <ul>
+      </ul>
+    </aside>
+
+    <footer id="footer">
+      <div id="tweet-btn">
+        <a href="#">
+            <i></i>
+            <span class="label">Tweet #<%=hashtag%></span>
+        </a>
+      </div>
+      <p>or tweet anytime using your country's name and #<%=hashtag%></p>
+      <div id="credits">
+        <a href="http://soundcloud.com/" target="_blank">Sound Cloud</a>
+        <a href="http://cargocollective.com/yonialter" target="_blank">Yoni Alter</a> &amp;
+        <a href="http://shmedia.co.uk" target="_blank">SH MEDIA</a>
+        <a href="http://soundcloud.com/jawnsolo/queen-we-are-the-champions" target="_blank">Song by Queen updloaded by jawnsolo</a>
+        <a href="http://soundcloud.com/jawnsolo/queen-we-are-the-champions" target="_blank">Queen - We Are The Champions</a>
+      </div>
+    </footer>
+    
+    
+   
+
+
+    <div id="overlay">
+      <form>
+        <a href="#" class="btn close-btn">X</a>
+        <h2>Champions Of The World</h2>
+        
+        <select class="multiple" name="Country" id="country-selector" autofocus="autofocus" autocorrect="off" autocomplete="off"></select>
+        
+        <div id="tweeter">
+          <a href="https://twitter.com/intent/tweet?button_hashtag='<%=hashtag%>'&text=Hello" class="twitter-hashtag-button" data-size="large">Tweet #championsoftheworld</a>
+          <script>
+                ! function(d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0];
+                      if(!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                      }
+                }(document, "script", "twitter-wjs");
+          </script>
+        </div>   
+      </form>
+      <span id="version">Version: <%=version%></span>
+    </div> 
+
+
+    
+  </body>
+</html>
