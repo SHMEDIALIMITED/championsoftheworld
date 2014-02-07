@@ -137,8 +137,6 @@ define([
 		},
 
 		showValidationxError : function(data) {
-			// Check if it was current user
-			console.log('showValidationxError', data.text, overlay.tweet)
 			if(data.text.indexOf(overlay.tweet) != -1) {
 				console.log('TWEET invalid')
 			}
@@ -153,12 +151,10 @@ define([
             if(tweet && tweet.get('queued')) tweet.save();
 			tweet = queue.shift();
 			if(tweet) {
-
-                console.log(tweet)
-
-
 				flag.loadTexture(tweet.get('country') + '.jpg');
-				if(sound)sound.play(39000, 77000);
+				if(sound) {
+                    sound.play(38000, 77000);
+                }
 			}
 		},
 

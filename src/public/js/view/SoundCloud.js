@@ -37,11 +37,12 @@ define(
 				sound.setVolume(0);
 				sound.play();
 
-				this._fadeInSound(5);
+				this._fadeInSound(1);
 
 				sound.onPosition(end, _.bind(function() {
-					this._fadeOutSound(5);
-				}), this);
+
+					this._fadeOutSound(1);
+				}, this));
 			},
 
 			stop: function() {
@@ -63,16 +64,22 @@ define(
 			},
 
 			_fadeOutSound: function(amount) {
+
+
+
 				var s = sound;
 				var vol = s.volume;
+
+
+
 				if (vol == 0) {
-					return false;
-					s.stop();
+                    s.stop();
+                    return false;
 				}
 				s.setVolume(Math.max(0,vol-amount));
 				setTimeout(_.bind(function(){
 					this._fadeOutSound(amount);
-				}),20);
+				}, this),20);
 			}
 
 		})
